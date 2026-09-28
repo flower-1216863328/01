@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>中秋邀请函 · 来宁波看月亮吧</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --night-1: #0b1d3a;
+    --night-2: #16305c;
+    --night-3: #274677;
+    --gold: #f5c56b;
+    --gold-deep: #d9a441;
+    --cream: #fdf3dc;
+    --red: #c94f4f;
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(175deg, var(--night-1) 0%, var(--night-2) 45%, var(--night-3) 100%);
+    color: var(--cream);
+    overflow-x: hidden;
+    line-height: 1.8;
+  }
+
+  /* ---------- 星空 ---------- */
+  .stars, .stars2 { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.8); }
+    50% { opacity: 0.95; transform: scale(1.15); }
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* ---------- 封面 ---------- */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 40px 24px;
+  }
+
+  .moon {
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 32%, #fffbe9, var(--gold) 55%, var(--gold-deep) 100%);
+    box-shadow: 0 0 40px rgba(245,197,107,0.55), 0 0 120px rgba(245,197,107,0.35);
+    animation: moonGlow 4s infinite ease-in-out;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 36px;
+  }
+  .moon::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 62% 40%, rgba(217,164,65,.5) 0 9px, transparent 10px),
+      radial-gradient(circle at 40% 65%, rgba(217,164,65,.4) 0 6px, transparent 7px),
+      radial-gradient(circle at 70% 68%, rgba(217,164,65,.35) 0 5px, transparent 6px),
+      radial-gradient(circle at 30% 38%, rgba(217,164,65,.3) 0 4px, transparent 5px);
+  }
+  @keyframes moonGlow {
+    0%, 100% { box-shadow: 0 0 40px rgba(245,197,107,.55), 0 0 110px rgba(245,197,107,.3); }
+    50% { box-shadow: 0 0 60px rgba(245,197,107,.75), 0 0 160px rgba(245,197,107,.45); }
+  }
+
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
+    filter: blur(2px);
+    animation: drift linear infinite;
+  }
+  .cloud.c1 { width: 200px; height: 34px; top: 18%; left: -220px; animation-duration: 46s; }
+  .cloud.c2 { width: 150px; height: 26px; top: 62%; left: -160px; animation-duration: 60s; animation-delay: -20s; }
+  .cloud.c3 { width: 260px; height: 40px; top: 78%; left: -280px; animation-duration: 70s; animation-delay: -45s; }
+  @keyframes drift { to { transform: translateX(calc(100vw + 320px)); } }
+
+  .lantern {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    animation: sway 5.5s infinite ease-in-out;
+    transform-origin: top center;
+  }
+  .lantern.l1 { left: 8%; animation-delay: 0s; }
+  .lantern.l2 { right: 10%; animation-delay: -2.5s; }
+  .lantern .string { width: 2px; height: 70px; background: rgba(245,197,107,.5); margin: 0 auto; }
+  .lantern .body {
+    width: 52px; height: 64px;
+    background: radial-gradient(circle at 50% 35%, #e06a5a, var(--red) 70%);
+    border-radius: 45%/55%;
+    box-shadow: 0 0 24px rgba(224,106,90,.6), inset 0 -6px 14px rgba(0,0,0,.25);
+    position: relative;
+  }
+  .lantern .body::before, .lantern .body::after {
+    content: "福"; position: absolute; left: 50%; transform: translateX(-50%);
+    color: var(--gold); font-size: 15px; font-weight: bold;
+  }
+  .lantern .body::before { top: 6px; }
+  .lantern .body::after { display: none; }
+  .lantern .tassel {
+    width: 3px; height: 26px;
+    background: var(--gold-deep);
+    margin: 0 auto;
+  }
+  @keyframes sway {
+    0%, 100% { transform: rotate(3.5deg); }
+    50% { transform: rotate(-3.5deg); }
+  }
+
+  .hero .tag {
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: rgba(253,243,220,.75);
+    margin-bottom: 14px;
+    text-indent: 6px;
+  }
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 8px;
+    background: linear-gradient(180deg, #fff8e6, var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+  .hero .date {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: rgba(253,243,220,.85);
+    border: 1px solid rgba(245,197,107,.45);
+    border-radius: 999px;
+    padding: 5px 20px;
+    margin-top: 18px;
+  }
+  .hero .to {
+    margin-top: 42px;
+    font-size: 15px;
+    color: rgba(253,243,220,.65);
+    animation: floatY 2.4s infinite ease-in-out;
+  }
+  .hero .to .arrow { display: block; font-size: 20px; margin-top: 4px; }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+  /* ---------- 信件 ---------- */
+  .section { padding: 56px 26px; position: relative; }
+
+  .letter {
+    background: linear-gradient(160deg, rgba(253,243,220,.96), rgba(250,236,205,.96));
+    color: #5a4630;
+    border-radius: 14px;
+    padding: 34px 26px 30px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    position: relative;
+  }
+  .letter::before {
+    content: "邀";
+    position: absolute;
+    top: -26px; left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 52px; height: 52px;
+    background: var(--red);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: bold;
+    box-shadow: 0 6px 16px rgba(201,79,79,.45);
+  }
+  .letter .salute { font-size: 17px; font-weight: 600; margin-top: 14px; margin-bottom: 16px; }
+  .letter p { font-size: 15.5px; margin-bottom: 12px; text-align: justify; }
+  .letter .poem {
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: #9a7332;
+    margin: 20px 0 6px;
+    line-height: 2.1;
+  }
+  .letter .sign { text-align: right; margin-top: 18px; font-size: 14.5px; color: #8a6a3a; }
+  .letter .seal {
+    display: inline-block;
+    margin-top: 6px;
+    border: 2px solid var(--red);
+    color: var(--red);
+    border-radius: 6px;
+    padding: 1px 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transform: rotate(-3deg);
+  }
+
+  /* ---------- 标题 ---------- */
+  .sec-title { text-align: center; margin-bottom: 30px; }
+  .sec-title .line {
+    display: flex; align-items: center; gap: 12px; justify-content: center;
+  }
+  .sec-title .line::before, .sec-title .line::after {
+    content: ""; height: 1px; width: 46px;
+    background: linear-gradient(90deg, transparent, rgba(245,197,107,.7));
+  }
+  .sec-title .line::after { background: linear-gradient(90deg, rgba(245,197,107,.7), transparent); }
+  .sec-title h2 { font-size: 22px; letter-spacing: 6px; color: var(--gold); font-weight: 600; }
+  .sec-title .sub { font-size: 12px; letter-spacing: 4px; color: rgba(253,243,220,.55); margin-top: 6px; }
+
+  /* ---------- 行程时间轴 ---------- */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before {
+    content: "";
+    position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--gold), rgba(245,197,107,.15));
+  }
+  .t-item { position: relative; margin-bottom: 26px; }
+  .t-item::before {
+    content: "";
+    position: absolute; left: -25.5px; top: 8px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--night-2);
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 12px rgba(245,197,107,.6);
+  }
+  .t-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(245,197,107,.28);
+    border-radius: 14px;
+    padding: 20px 18px;
+    backdrop-filter: blur(4px);
+  }
+  .t-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .t-date { font-size: 16px; font-weight: 600; color: var(--gold); letter-spacing: 1px; }
+  .t-badge {
+    font-size: 11px;
+    background: rgba(201,79,79,.85);
+    color: #fff;
+    border-radius: 999px;
+    padding: 2px 10px;
+    letter-spacing: 1px;
+  }
+  .t-badge.gold { background: rgba(217,164,65,.9); }
+  .flight {
+    background: rgba(11,29,58,.55);
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .flight .f-city { text-align: center; }
+  .flight .f-time { font-size: 21px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+  .flight .f-place { font-size: 13px; color: rgba(253,243,220,.75); margin-top: 2px; }
+  .flight .f-mid { text-align: center; flex: 1; padding: 0 8px; }
+  .flight .f-mid .plane { font-size: 22px; display: block; }
+  .flight .f-mid .dur { font-size: 11px; color: rgba(253,243,220,.55); }
+  .flight .f-mid .track {
+    position: relative; height: 1px;
+    background: rgba(245,197,107,.4);
+    margin: 6px 4px;
+    overflow: visible;
+  }
+  .flight .f-mid .track::after {
+    content: "✈";
+    position: absolute;
+    top: -9px; left: 0;
+    font-size: 12px;
+    color: var(--gold);
+    animation: fly 3s infinite linear;
+  }
+  @keyframes fly { from { left: -4px; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { left: calc(100% - 4px); opacity: 0; } }
+
+  .t-desc { font-size: 14px; color: rgba(253,243,220,.88); }
+  .t-desc b { color: var(--gold); font-weight: 600; }
+  .t-desc .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip {
+    font-size: 12px;
+    border: 1px solid rgba(245,197,107,.4);
+    color: var(--gold);
+    border-radius: 999px;
+    padding: 3px 12px;
+    letter-spacing: 1px;
+  }
+
+  /* ---------- 亮点 ---------- */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .g-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(245,197,107,.22);
+    border-radius: 14px;
+    padding: 20px 14px;
+    text-align: center;
+  }
+  .g-card .ico { font-size: 34px; display: block; margin-bottom: 10px; }
+  .g-card h3 { font-size: 15px; color: var(--gold); letter-spacing: 2px; margin-bottom: 6px; }
+  .g-card p { font-size: 12px; color: rgba(253,243,220,.72); line-height: 1.7; }
+  .g-card.wide { grid-column: span 2; }
+
+  /* ---------- 结尾 ---------- */
+  .ending {
+    text-align: center;
+    padding: 60px 30px 46px;
+    position: relative;
+  }
+  .ending .big-moon {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 32%, #fffbe9, var(--gold) 60%, var(--gold-deep));
+    box-shadow: 0 0 34px rgba(245,197,107,.5);
+    margin: 0 auto 26px;
+    animation: moonGlow 4s infinite ease-in-out;
+  }
+  .ending h2 { font-size: 24px; letter-spacing: 5px; color: var(--gold); margin-bottom: 14px; }
+  .ending p { font-size: 14px; color: rgba(253,243,220,.8); }
+  .ending .heart { font-size: 22px; display: block; margin-top: 22px; animation: beat 1.4s infinite; }
+  @keyframes beat { 0%,100% { transform: scale(1); } 12% { transform: scale(1.25); } 24% { transform: scale(1); } 36% { transform: scale(1.18); } 48% { transform: scale(1); } }
+  .ending .tip {
+    margin-top: 34px;
+    font-size: 11.5px;
+    color: rgba(253,243,220,.42);
+    letter-spacing: 1px;
+  }
+
+  /* 入场动画 */
+  .reveal { opacity: 0; transform: translateY(26px); transition: all .9s ease; }
+  .reveal.on { opacity: 1; transform: none; }
+
+  /* 桂花飘落 */
+  .petal {
+    position: fixed;
+    top: -30px;
+    color: rgba(245,197,107,.7);
+    font-size: 13px;
+    z-index: 3;
+    pointer-events: none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: .9; }
+    100% { transform: translateY(105vh) translateX(60px) rotate(320deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="stars2" id="stars2"></div>
+<div id="petals"></div>
+
+<div class="page">
+
+  <!-- 封面 -->
+  <section class="hero">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+    <div class="lantern l1"><div class="string"></div><div class="body"></div><div class="tassel"></div></div>
+    <div class="lantern l2"><div class="string"></div><div class="body"></div><div class="tassel"></div></div>
+
+    <div class="moon"></div>
+    <div class="tag">海 上 生 明 月 · 天 涯 共 此 时</div>
+    <h1>中秋邀请函</h1>
+    <div class="date">2026 · 九月廿五 · 农历八月十五</div>
+    <div class="to">亲爱的，请查收这封来自宁波的月亮<span class="arrow">↓</span></div>
+  </section>
+
+  <!-- 信件 -->
+  <section class="section">
+    <div class="letter reveal">
+      <div class="salute">致我最爱的你：</div>
+      <p>今年的中秋，我不想隔着屏幕跟你说"月亮好圆"。我想和你站在同一片月光下，把月饼掰成两半，一人一半。</p>
+      <p>所以，我正式向你发出邀请——这个中秋，请来宁波。我带你去吃最鲜的海鲜，去东钱湖吹吹秋风看落日，去老外滩看灯火和月亮一起亮起来。</p>
+      <p>机票我已经想好了，时间都替你挑的，不用早起，不用赶夜路。你只需要带上你自己，和一点点期待。</p>
+      <p class="poem">海上生明月，天涯共此时。<br>这一次，我们不"共此时"——<br>我们要在同一轮月亮下。</p>
+      <div class="sign">
+        <span class="seal">盼 复</span>
+        <div style="margin-top:10px;">爱你的我 · 于宁波</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 行程 -->
+  <section class="section">
+    <div class="sec-title reveal">
+      <div class="line"><h2>行 程 安 排</h2></div>
+      <div class="sub">ITINERARY · 三天两夜</div>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-card">
+          <div class="t-head">
+            <div class="t-date">9月25日 · 周五（中秋节）</div>
+            <div class="t-badge">启程 · 来我身边</div>
+          </div>
+          <div class="flight">
+            <div class="f-city"><div class="f-time">11:45</div><div class="f-place">广州</div></div>
+            <div class="f-mid">
+              <span class="plane">🛫</span>
+              <div class="track"></div>
+              <span class="dur">约 2 小时 10 分</span>
+            </div>
+            <div class="f-city"><div class="f-time">13:55</div><div class="f-place">宁波</div></div>
+          </div>
+          <div class="t-desc">落地就接机！安顿好后傍晚出发，<b>老外滩</b>看甬江夜色，晚上一起吃<b>中秋团圆饭</b>，抬头就是八月十五的月亮。</div>
+          <div class="chips"><span class="chip">✈ 接机</span><span class="chip">🏮 老外滩</span><span class="chip">🌕 赏月</span></div>
+        </div>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-card">
+          <div class="t-head">
+            <div class="t-date">9月26日 · 周六</div>
+            <div class="t-badge gold">东钱湖 · 慢慢逛</div>
+          </div>
+          <div class="t-desc">睡到自然醒，去<b>东钱湖</b>。环湖骑行、湖畔散步、韩岭老街的烟火气，秋天的东钱湖配得上所有形容词。晚上安排<b>海鲜大餐</b>——梭子蟹、皮皮虾、大黄鱼，鲜掉眉毛的那种。</div>
+          <div class="chips"><span class="chip">🚲 环湖</span><span class="chip">🏮 韩岭老街</span><span class="chip">🦀 海鲜盛宴</span></div>
+        </div>
+      </div>
+
+      <div class="t-item reveal">
+        <div class="t-card">
+          <div class="t-head">
+            <div class="t-date">9月27日 · 周日</div>
+            <div class="t-badge">返程 · 带着月亮回去</div>
+          </div>
+          <div class="flight">
+            <div class="f-city"><div class="f-time">12:50</div><div class="f-place">宁波</div></div>
+            <div class="f-mid">
+              <span class="plane">🛬</span>
+              <div class="track"></div>
+              <span class="dur">约 2 小时 20 分</span>
+            </div>
+            <div class="f-city"><div class="f-time">15:10</div><div class="f-place">广州</div></div>
+          </div>
+          <div class="t-desc">上午再吃一顿<b>宁波早餐</b>（汤圆、年糕安排上），我送你到机场，行李箱里塞满伴手礼和没说完的话。</div>
+          <div class="chips"><span class="chip">🍡 早餐</span><span class="chip">🎁 伴手礼</span><span class="chip">✈ 送机</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 亮点 -->
+  <section class="section">
+    <div class="sec-title reveal">
+      <div class="line"><h2>我 们 去 干 嘛</h2></div>
+      <div class="sub">HIGHLIGHTS · 已列入心动清单</div>
+    </div>
+    <div class="grid">
+      <div class="g-card reveal"><span class="ico">🦀</span><h3>海鲜自由</h3><p>梭子蟹、皮皮虾、蛏子、黄鱼……宁波人餐桌的鲜，你来了就知道。</p></div>
+      <div class="g-card reveal"><span class="ico">🌊</span><h3>东钱湖</h3><p>"西子风韵，太湖气魄"。秋天的湖边，风都是温柔的。</p></div>
+      <div class="g-card reveal"><span class="ico">🏮</span><h3>老外滩</h3><p>比上海外滩还早二十年。夜里灯火一亮，江风和月亮都是氛围组。</p></div>
+      <div class="g-card reveal"><span class="ico">🌕</span><h3>一起赏月</h3><p>最重要的行程只有一条：八月十五的月亮，我们在同一处看。</p></div>
+      <div class="g-card wide reveal"><span class="ico">🥮</span><h3>以及……</h3><p>剩下的留一点悬念，到了宁波慢慢解锁。反正有你在，去哪儿都算好地方。</p></div>
+    </div>
+  </section>
+
+  <!-- 结尾 -->
+  <section class="ending">
+    <div class="big-moon"></div>
+    <h2>等你，也等月圆</h2>
+    <p>9月25日 13:55，我在宁波栎社机场 arrivals 出口<br>举着比月亮还亮的期待等你</p>
+    <span class="heart">❤️</span>
+    <div class="tip">—— 滑动到底啦，记得回复我哦 ——</div>
+  </section>
+
+</div>
+
+<script>
+  // 星星
+  (function () {
+    var make = function (container, n, maxSize) {
+      for (var i = 0; i < n; i++) {
+        var s = document.createElement("div");
+        s.className = "star";
+        var size = (Math.random() * maxSize + 1).toFixed(1);
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.left = (Math.random() * 100) + "%";
+        s.style.top = (Math.random() * 100) + "%";
+        s.style.animationDelay = (Math.random() * 3).toFixed(2) + "s";
+        s.style.animationDuration = (2 + Math.random() * 3).toFixed(2) + "s";
+        container.appendChild(s);
+      }
+    };
+    make(document.getElementById("stars"), 40, 2.4);
+    make(document.getElementById("stars2"), 18, 3.4);
+  })();
+
+  // 桂花飘落
+  (function () {
+    var wrap = document.getElementById("petals");
+    for (var i = 0; i < 10; i++) {
+      var p = document.createElement("div");
+      p.className = "petal";
+      p.textContent = "❀";
+      p.style.left = (Math.random() * 100) + "%";
+      p.style.animationDuration = (7 + Math.random() * 8).toFixed(1) + "s";
+      p.style.animationDelay = (Math.random() * 10).toFixed(1) + "s";
+      p.style.fontSize = (10 + Math.random() * 8).toFixed(0) + "px";
+      wrap.appendChild(p);
+    }
+  })();
+
+  // 入场动画
+  (function () {
+    var els = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    } else {
+      els.forEach(function (el) { el.classList.add("on"); });
+    }
+  })();
+</script>
+</body>
+</html>
